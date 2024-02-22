@@ -14,6 +14,10 @@ public class EnemyProjectile : MonoBehaviour
           //  {
           //      collision.GetComponent<>().DealDamge(damage);
             //}
+             if(collision.tag =="Player")
+            {
+              PlayerStats.playerStats.DealDamge(damage);
+            }
             Destroy(gameObject);
         }
    }

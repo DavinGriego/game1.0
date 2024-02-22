@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FIghtBack : MonoBehaviour
+public class LazarBeam : MonoBehaviour
 {
     //public GameObject EnemyProjectile;
     public GameObject projectile;
-    public Transform player;
+    private GameObject player;
     public float minDamage;
     public float maxDamage;
     public float projectileForce;
@@ -15,6 +15,7 @@ public class FIghtBack : MonoBehaviour
     void Start()
     {
         StartCoroutine(ShootPlayer());
+        player = FindObjectOfType<PlayerMovement>().gameObject;
 
     }
 
@@ -25,7 +26,7 @@ public class FIghtBack : MonoBehaviour
         {
             GameObject spell = Instantiate(projectile, transform.position, Quaternion.identity);
             Vector2 myPos = transform.position;
-            Vector2 targetPos = player.position;
+            Vector2 targetPos = player.transform.position;
             Vector2 direction = (targetPos - myPos).normalized;
             spell.GetComponent<Rigidbody2D>().velocity = direction * projectileForce;
             spell.GetComponent<EnemyProjectile>().damage=Random.Range(minDamage, maxDamage);
